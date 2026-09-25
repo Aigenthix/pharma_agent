@@ -51,7 +51,7 @@ User question:
 
         client = get_client()
         response = client.models.generate_content(
-            model="gemini-3.0-flash-lite",
+            model="gemini-3.1-flash-lite",
             contents=prompt
         )
 
