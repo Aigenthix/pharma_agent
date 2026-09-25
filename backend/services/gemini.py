@@ -4,15 +4,22 @@ import google.genai
 
 logger = logging.getLogger(__name__)
 
-api_key = os.getenv("GEMINI_API_KEY")
-if not api_key:
-    raise ValueError("GEMINI_API_KEY environment variable is required")
+_client = None
 
-try:
-    client = google.genai.Client(api_key=api_key)
-except Exception as e:
-    logger.error(f"Failed to initialize Gemini client: {e}")
-    raise ValueError(f"Invalid API key: {e}")
+def get_client():
+    global _client
+    if _client is None:
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY environment variable is required")
+
+        try:
+            _client = google.genai.Client(api_key=api_key)
+        except Exception as e:
+            logger.error(f"Failed to initialize Gemini client: {e}")
+            raise ValueError(f"Invalid API key: {e}")
+
+    return _client
 
 SYSTEM_PROMPT = """You are PharmaAssist AI.
 
@@ -42,6 +49,7 @@ Product information:
 User question:
 {user_question}"""
 
+        client = get_client()
         response = client.models.generate_content(
             model="gemini-3.0-flash-lite",
             contents=prompt
