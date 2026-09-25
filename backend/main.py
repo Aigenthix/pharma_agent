@@ -11,9 +11,11 @@ load_dotenv()
 
 app = FastAPI(title="PharmaAssist AI")
 
-# Load medicines database
+# Load medicines database (test or real)
 def load_medicines():
-    with open("data/medicines.json") as f:
+    import os
+    db_path = "data/medicines_test.json" if os.path.exists("data/medicines_test.json") else "data/medicines.json"
+    with open(db_path) as f:
         return json.load(f)
 
 medicines_db = load_medicines()

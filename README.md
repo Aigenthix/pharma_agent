@@ -97,6 +97,16 @@ pytest
 - **Database**: JSON (no SQL)
 - **Container**: Docker, Docker Compose
 
+## Database
+
+### Testing (Phase 1)
+- `data/medicines_test.json` - Test database with 20 sample products for development
+
+### Production (When Ready)
+- `data/medicines.json` - Real product database (not tracked in git)
+- The backend automatically loads `medicines_test.json` if it exists, otherwise `medicines.json`
+- Copy your real products to `data/medicines.json` to use them
+
 ## Notes
 
 - No authentication in V1
