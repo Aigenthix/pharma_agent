@@ -1,11 +1,11 @@
 import os
-import google.genai as genai
+import google.genai
 
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     raise ValueError("GEMINI_API_KEY environment variable is required")
 
-genai.configure(api_key=api_key)
+client = google.genai.Client(api_key=api_key)
 
 SYSTEM_PROMPT = """You are PharmaAssist AI.
 
@@ -34,6 +34,8 @@ Product information:
 User question:
 {user_question}"""
 
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt
+    )
     return response.text
