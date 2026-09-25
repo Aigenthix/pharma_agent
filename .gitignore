@@ -1,5 +1,10 @@
 .env
 data/medicines.json
+.agents/
+.claude/
+.history/
+plan.md
+skills-lock.json
 __pycache__/
 *.py[cod]
 *$py.class
