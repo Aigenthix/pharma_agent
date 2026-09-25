@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from services.gemini import query_gemini
+from .services.gemini import query_gemini
 
 load_dotenv()
 
